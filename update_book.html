@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book - Chapter and Verse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .dashboard-container {
+            padding: 20px;
+        }
+
+        .dashboard-card {
+            background-color: #fff;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .alert {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Welcome to Chapter and Verse</h1>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('admin_dashboard') }}">Books</a>
+        <a href="#">Buy</a>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-card form-container">
+            <h2>Update a Book</h2>
+
+            {% if result_message %}
+            <div class="alert {% if 'success' in result_message.lower() %}alert-success{% else %}alert-danger{% endif %}">
+                {{ result_message }}
+            </div>
+            {% endif %}
+
+            <form action="{{ url_for('update_book_action') }}" method="post">
+                <div class="form-group">
+                    <label for="book_id">Book ID:</label>
+                    <input type="text" name="book_id" id="book_id" placeholder="Enter book ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="title" placeholder="Enter title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="author_id">Author ID:</label>
+                    <input type="text" name="author_id" id="author_id" placeholder="Enter author ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genre_id">Genre ID:</label>
+                    <input type="text" name="genre_id" id="genre_id" placeholder="Enter genre ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="publisher_id">Publisher ID:</label>
+                    <input type="text" name="publisher_id" id="publisher_id" placeholder="Enter publisher ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="text" name="price" id="price" placeholder="Enter price" required>
+                </div>
+
+                <input type="hidden" name="action" value="update">
+                <input type="submit" value="Update Book">
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
